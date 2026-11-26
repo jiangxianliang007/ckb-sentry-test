@@ -20,3 +20,7 @@ DSN can also be passed with --dsn, but environment variables avoid putting it in
 ## Build and release
 
 Run cargo build --release locally if desired. GitHub Actions builds both architectures on pushes to main and on version tags. To publish binaries to Releases, push a tag such as v0.1.0. The workflow also supports manual builds.
+
+## SDK 0.34.0 flush behavior
+
+The default reqwest transport in SDK 0.34.0 returns `recv_timeout(...).is_err()` from flush, the inverse of the documented contract. Version 0.1.1 accounts for that behavior without changing the SDK version. Use `--debug` to inspect SDK diagnostics; output can contain event data, so do not share it unredacted. A drained queue still does not guarantee HTTP acceptance or ingestion.
