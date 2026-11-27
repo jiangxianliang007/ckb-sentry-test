@@ -24,3 +24,7 @@ Run cargo build --release locally if desired. GitHub Actions builds both archite
 ## SDK 0.34.0 flush behavior
 
 The default reqwest transport in SDK 0.34.0 returns `recv_timeout(...).is_err()` from flush, the inverse of the documented contract. Version 0.1.1 accounts for that behavior without changing the SDK version. Use `--debug` to inspect SDK diagnostics; output can contain event data, so do not share it unredacted. A drained queue still does not guarantee HTTP acceptance or ingestion.
+
+## Console output (v0.1.2)
+
+The intentional test panic still runs through the SDK panic hook with its original stack trace. Only its default console message is suppressed; unrelated panics retain normal output. Use `--debug` to retain the original panic diagnostics. PASS indicates local capture or queue processing, not server acceptance. Colors are used only on interactive stdout and can be disabled with NO_COLOR.
